@@ -1,9 +1,10 @@
 # $logfile = "$env:USERPROFILE\checkout.csv"
-$logfile =  [System.Collections.Array]::New()
+$logfile =  [System.Collections.ArrayList]::New()
 
 Clear-Host
 Read-Host "Press any key to begin"
 while (1) {
+   Clear-Host 
    $SMID = Read-Host "Scan your SMID badge"
    $rfDevice = Read-Host "Scan your RF device"
    
