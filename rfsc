@@ -1,0 +1,28 @@
+# $logfile = "$env:USERPROFILE\checkout.csv"
+$logfile =  [System.Collections.Array]::New()
+
+Clear-Host
+Read-Host "Press any key to begin"
+while (1) {
+   $SMID = Read-Host "Scan your SMID badge"
+   $rfDevice = Read-Host "Scan your RF device"
+   
+   $obj = New-Object -TypeName psobject -Property @{
+       SMID     = $SMID
+       RFGUN    = $rfDevice
+       Time     = Get-Date -Format f 
+   }
+   
+   # $obj | Export-Csv -Path $logfile -Append -NoTypeInformation -Encoding ASCII 
+   [void]$logfile.Add($obj)
+   
+   Write-Host "`n Employee " -NoNewLine
+   Write-Host -Fore Green $SMID -NoNewLine
+   Write-Host " checked out RF device " -NoNewLine
+   Write-Host -Fore Green "$rfDevice `n"
+   
+   $num = Read-Host "Press 1 to enter info or 2 to see scan record"
+   if ($num -ne 1){
+       $logfile | Select Time,SMID,RFGUN | Format-Table -Auto 
+   }
+}
